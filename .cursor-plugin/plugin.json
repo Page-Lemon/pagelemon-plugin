@@ -1,0 +1,26 @@
+{
+  "name": "pagelemon",
+  "displayName": "Page Lemon",
+  "version": "1.0.0",
+  "description": "Publish websites from chat and keep editing them: live links, version history, forms, bookings, private pages and custom domains.",
+  "author": {
+    "name": "Page Lemon",
+    "email": "support@pagelemon.com",
+    "url": "https://pagelemon.com"
+  },
+  "homepage": "https://pagelemon.com",
+  "repository": "https://github.com/Page-Lemon/pagelemon-plugin",
+  "keywords": [
+    "website",
+    "publish",
+    "hosting",
+    "static site",
+    "landing page",
+    "forms",
+    "booking",
+    "mcp"
+  ],
+  "logo": "assets/logo.svg",
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

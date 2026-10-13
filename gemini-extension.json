@@ -1,0 +1,13 @@
+{
+  "name": "pagelemon",
+  "version": "1.0.0",
+  "description": "Publish websites from chat and keep editing them: live links, version history, forms, bookings, private pages and custom domains.",
+  "mcpServers": {
+    "pagelemon": {
+      "httpUrl": "https://mcp.pagelemon.com",
+      "oauth": {
+        "enabled": true
+      }
+    }
+  }
+}

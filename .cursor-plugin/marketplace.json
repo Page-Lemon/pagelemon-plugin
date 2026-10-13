@@ -1,0 +1,13 @@
+{
+  "name": "pagelemon",
+  "owner": {
+    "name": "Page Lemon"
+  },
+  "plugins": [
+    {
+      "name": "pagelemon",
+      "source": "./",
+      "description": "Publish websites from chat and keep editing them: live links, version history, forms, bookings, private pages and custom domains."
+    }
+  ]
+}

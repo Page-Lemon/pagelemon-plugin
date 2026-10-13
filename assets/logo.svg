@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="5 5 54 54" width="32" height="32" role="img" aria-label="Page Lemon">
+  <title>Page Lemon</title>
+  <path d="M32 10C38 10 43 11.6 47 14.2L53 11L51.6 17.6C54.4 21 56 25.3 56 30C56 41 46 50 32 50C28.5 50 25 49.3 22 48L10 54L13.5 43.5C9.8 40 8 35.2 8 30C8 19 18 10 32 10Z" fill="#FFE45C" stroke="#1B2A9E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="21.5" cy="30" r="3.6" fill="#1B2A9E"/>
+  <circle cx="32" cy="30" r="3.6" fill="#1B2A9E"/>
+  <circle cx="42.5" cy="30" r="3.6" fill="#FF8FB1"/>
+</svg>

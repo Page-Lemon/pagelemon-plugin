@@ -1,0 +1,20 @@
+{
+  "name": "pagelemon",
+  "interface": {
+    "displayName": "Page Lemon"
+  },
+  "plugins": [
+    {
+      "name": "pagelemon",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/Page-Lemon/pagelemon-plugin.git"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

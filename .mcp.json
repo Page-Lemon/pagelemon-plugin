@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "pagelemon": {
+      "type": "http",
+      "url": "https://mcp.pagelemon.com"
+    }
+  }
+}

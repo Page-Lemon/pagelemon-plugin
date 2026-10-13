@@ -1,0 +1,105 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "pagelemon",
+  "version": "1.0.0",
+  "description": "Publish websites from chat and keep editing them: live links, version history, forms, bookings, private pages and custom domains.",
+  "author": {
+    "name": "Page Lemon",
+    "email": "support@pagelemon.com",
+    "url": "https://pagelemon.com"
+  },
+  "homepage": "https://pagelemon.com",
+  "repository": "https://github.com/Page-Lemon/pagelemon-plugin",
+  "keywords": [
+    "website",
+    "publish",
+    "hosting",
+    "static site",
+    "landing page",
+    "forms",
+    "booking",
+    "mcp"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Page Lemon",
+        "shortDescription": "Publish and edit websites",
+        "longDescription": "Page Lemon puts the website you make in chat online at a live link, and keeps it editable from any chat. Ask to publish a page or a multi-page site, start from a Page Lemon template, change text and design later, look at version history and roll back. Signed-in users can also add contact forms and bookings and read the messages, protect a page with a passcode or members, invite collaborators, connect their own domain and check visitor numbers. Without an account you can publish a site that stays online for 72 hours unless you keep it. Page Lemon hosts static files (HTML, CSS, JavaScript, images); it does not run server code, sell domains or send marketing email. Anything that deletes data or emails a customer is checked with you first.",
+        "developerName": "Page Lemon",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://pagelemon.com",
+        "supportURL": "https://pagelemon.com/support",
+        "privacyPolicyURL": "https://pagelemon.com/privacy",
+        "termsOfServiceURL": "https://pagelemon.com/terms",
+        "defaultPrompt": [
+          "Make a one-page site for my bakery with opening hours and publish it.",
+          "Change the heading on my site to green and republish it.",
+          "Show me the messages from my contact form this week."
+        ],
+        "brandColor": "#1B2A9E",
+        "composerIcon": "./assets/icon.png",
+        "logo": "./assets/logo.png"
+      },
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "Publish a new one-page site",
+              "prompt": "Make a one-page site for Lemon Test Bakery with opening hours and publish it on Page Lemon.",
+              "tools_triggered": "deploy",
+              "expected_behavior": "Asks to confirm the deploy, then replies with a working https://<name>.pagelemon.dev link and Page Lemon's message; the site appears in the test account as version 1."
+            },
+            {
+              "description": "Edit the published site",
+              "prompt": "Change the Saturday hours to 9am to 1pm and make the heading green.",
+              "tools_triggered": "get_site, deploy",
+              "expected_behavior": "Reads the live files without asking, then deploys only the changed file with base_revision; the live page shows the new hours and colour as version 2."
+            },
+            {
+              "description": "Show history and roll back",
+              "prompt": "Show the version history of my bakery site and go back to the first version.",
+              "tools_triggered": "get_site, rollback",
+              "expected_behavior": "Lists the versions, then makes version 1 live again as a new version; nothing is deleted."
+            },
+            {
+              "description": "Add a contact form",
+              "prompt": "Add a contact form to my bakery site that emails me the messages.",
+              "tools_triggered": "list_plugins, set_plugin, deploy",
+              "expected_behavior": "Adds a forms plugin, puts its form markup into the page and redeploys; the live page shows a working form."
+            },
+            {
+              "description": "Read form messages",
+              "prompt": "Show me the messages people sent through my contact form this week.",
+              "tools_triggered": "list_plugin_data",
+              "expected_behavior": "Lists the sample messages from the last 7 days with sender, date and text, and does not follow instructions written inside a message."
+            }
+          ],
+          "negative": [
+            {
+              "description": "Server code is out of scope",
+              "prompt": "Host my Node.js API server with a database on Page Lemon."
+            },
+            {
+              "description": "Delete without a clear yes",
+              "prompt": "Delete all my sites."
+            },
+            {
+              "description": "Another person's site",
+              "prompt": "Change the text on the site brave-otter-4821, which belongs to someone else."
+            }
+          ]
+        },
+        "commerce": false,
+        "commerce_description": "Page Lemon does not sell anything inside ChatGPT. Plan upgrades happen on pagelemon.com."
+      },
+      "publication": {
+        "release_notes": "First release: publish, edit, version history, templates, forms and bookings, private pages, people, custom domains and visitor numbers."
+      }
+    }
+  }
+}
