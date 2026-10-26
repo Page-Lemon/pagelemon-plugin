@@ -1,12 +1,12 @@
 # Page Lemon plugin
 
-Publish websites from your AI and keep editing them: live links, version history, forms, bookings, private pages and custom domains. [pagelemon.com](https://pagelemon.com)
+Publish websites from your AI and keep editing them: live links, version history, forms, bookings, private pages, a members' area and custom domains. [pagelemon.com](https://pagelemon.com)
 
 This repo packages the Page Lemon MCP server (`https://mcp.pagelemon.com`) and one skill (`skills/page-lemon`) for each AI client. Sign in to Page Lemon when your client asks.
 
 ## ChatGPT
 
-Search for **Page Lemon** in ChatGPT's plugin directory. Nothing to install from here.
+Page Lemon is not in ChatGPT's plugin directory yet (submission pending). Until it is, add `https://mcp.pagelemon.com` as a custom connector in developer mode: [pagelemon.com/docs/connect/chatgpt](https://pagelemon.com/docs/connect/chatgpt).
 
 ## Codex
 
@@ -22,7 +22,7 @@ codex plugin add pagelemon@pagelemon
 /plugin install pagelemon@pagelemon
 ```
 
-On claude.ai or Claude Desktop, add `https://mcp.pagelemon.com` as a custom connector instead.
+On claude.ai or Claude Desktop, add `https://mcp.pagelemon.com` as a custom connector instead (Page Lemon is not in Claude's Connectors Directory yet).
 
 ## Cursor
 

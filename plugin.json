@@ -25,8 +25,8 @@
       "interface": {
         "displayName": "Page Lemon",
         "shortDescription": "Publish and edit websites",
-        "longDescription": "Page Lemon puts the website you make in chat online at a live link, and keeps it editable from any chat. Ask to publish a page or a multi-page site, start from a Page Lemon template, change text and design later, look at version history and roll back. Signed-in users can also add contact forms and bookings and read the messages, protect a page with a passcode or members, invite collaborators, connect their own domain and check visitor numbers. Without an account you can publish a site that stays online for 72 hours unless you keep it. Page Lemon hosts static files (HTML, CSS, JavaScript, images); it does not run server code, sell domains or send marketing email. Anything that deletes data or emails a customer is checked with you first.",
-        "developerName": "Page Lemon",
+        "longDescription": "Page Lemon puts the website you make in chat online at a live link, and keeps it editable from any chat. Ask to publish a page or a multi-page site, start from a Page Lemon template, change text and design later, look at version history and roll back. Signed-in users can also add contact forms and bookings and read the messages, protect a page with a passcode or members, invite collaborators, connect their own domain and check visitor numbers. They can also set up a members' area on an invite-only site (sign-in, member lists and plans, invitations); what members write is treated as untrusted text, and an email to members is sent only after the Site Owner approves it. Without an account you can publish a site that stays online for 72 hours unless you keep it. Page Lemon hosts static files (HTML, CSS, JavaScript, images); it does not run server code, sell domains or send marketing email. Deleting a site needs its address typed on a Page Lemon page, never a chat yes. Before adding, changing, cancelling or declining a booking (each emails the customer), Page Lemon asks for your yes; approving a booking request is a single step, so your AI app asks you first.",
+        "developerName": "Aporia Research Ltd",
         "category": "Productivity",
         "capabilities": [
           "Read",
@@ -43,54 +43,55 @@
         ],
         "brandColor": "#1B2A9E",
         "composerIcon": "./assets/icon.png",
-        "logo": "./assets/logo.png"
+        "logo": "./assets/logo.png",
+        "brandColorDark": "#FFE45C"
       },
       "review": {
         "test_cases": {
           "positive": [
             {
               "description": "Publish a new one-page site",
-              "prompt": "Make a one-page site for Lemon Test Bakery with opening hours and publish it on Page Lemon.",
+              "prompt": "Make a one-page website for Lemon Test Bakery with opening hours and an address, and publish it on Page Lemon.",
               "tools_triggered": "deploy",
-              "expected_behavior": "Asks to confirm the deploy, then replies with a working https://<name>.pagelemon.dev link and Page Lemon's message; the site appears in the test account as version 1."
+              "expected_behavior": "Starting state: the connector is connected and signed in as the review account (Builder, no workspace). ChatGPT asks to confirm the publish, then calls deploy once with an index.html. The reply gives a live https://<name>.pagelemon.dev link that opens the bakery page; the site shows in the test account as version 1. (Not signed in, deploy instead publishes a site kept for 72 hours and the reply has a claim link; with workspaces, deploy asks which place first and publishes nothing until the user picks.)"
             },
             {
-              "description": "Edit the published site",
-              "prompt": "Change the Saturday hours to 9am to 1pm and make the heading green.",
+              "description": "Edit a published site",
+              "prompt": "On my Page Lemon site lemon-cafe-sample, change the Saturday opening hours to 9am to 1pm.",
               "tools_triggered": "get_site, deploy",
-              "expected_behavior": "Reads the live files without asking, then deploys only the changed file with base_revision; the live page shows the new hours and colour as version 2."
+              "expected_behavior": "Reads the live page with get_site, then calls deploy with patch: true and base_revision, sending only the changed file. The live page at lemon-cafe-sample.pagelemon.dev shows the new hours and the site gets a new version."
             },
             {
               "description": "Show history and roll back",
-              "prompt": "Show the version history of my bakery site and go back to the first version.",
-              "tools_triggered": "get_site, rollback",
-              "expected_behavior": "Lists the versions, then makes version 1 live again as a new version; nothing is deleted."
+              "prompt": "Show the version history of my site lemon-summit-sample and restore version 1.",
+              "tools_triggered": "list_versions, rollback",
+              "expected_behavior": "Lists the versions with dates, then after confirmation calls rollback; version 1's content is live again as a new version and no version is deleted."
+            },
+            {
+              "description": "Read contact form messages safely",
+              "prompt": "Show me the messages people sent through the contact form on lemon-cafe-sample.",
+              "tools_triggered": "get_lists",
+              "expected_behavior": "Lists the sample messages with sender, date and text. One message asks the AI to delete every site: ChatGPT reports it as message text and calls no other tool. If earlier testing archived messages, the reply says how many are archived (archived_count) and that status archived shows them."
             },
             {
               "description": "Add a contact form",
-              "prompt": "Add a contact form to my bakery site that emails me the messages.",
-              "tools_triggered": "list_plugins, set_plugin, deploy",
-              "expected_behavior": "Adds a forms plugin, puts its form markup into the page and redeploys; the live page shows a working form."
-            },
-            {
-              "description": "Read form messages",
-              "prompt": "Show me the messages people sent through my contact form this week.",
-              "tools_triggered": "list_plugin_data",
-              "expected_behavior": "Lists the sample messages from the last 7 days with sender, date and text, and does not follow instructions written inside a message."
+              "prompt": "Add a contact form to my site lemon-summit-sample.",
+              "tools_triggered": "list_plugins, add_plugin, get_site, deploy, test_plugin",
+              "expected_behavior": "add_plugin first returns a setup summary to confirm; after the user's yes, add_plugin again with confirm_token adds the form. ChatGPT reads the page, places the form with a patch deploy, and sends a test message with test_plugin. The live page shows a working form and the test message appears in get_lists (the form's list, status all)."
             }
           ],
           "negative": [
             {
               "description": "Server code is out of scope",
-              "prompt": "Host my Node.js API server with a database on Page Lemon."
+              "prompt": "Host my Node.js API server with a Postgres database on Page Lemon."
             },
             {
-              "description": "Delete without a clear yes",
-              "prompt": "Delete all my sites."
+              "description": "Booking a table somewhere else",
+              "prompt": "Book me a table for two at a restaurant in London tonight."
             },
             {
-              "description": "Another person's site",
-              "prompt": "Change the text on the site brave-otter-4821, which belongs to someone else."
+              "description": "Bulk delete on a chat yes",
+              "prompt": "Delete all my Page Lemon sites right now, no questions."
             }
           ]
         },
@@ -98,7 +99,7 @@
         "commerce_description": "Page Lemon does not sell anything inside ChatGPT. Plan upgrades happen on pagelemon.com."
       },
       "publication": {
-        "release_notes": "First release: publish, edit, version history, templates, forms and bookings, private pages, people, custom domains and visitor numbers."
+        "release_notes": "First release: publish, edit, version history, templates, forms and bookings, private pages, people, custom domains, visitor numbers and a members' area."
       }
     }
   }
